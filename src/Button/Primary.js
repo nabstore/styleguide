@@ -16,7 +16,7 @@ const Primary = styled.button`
   opacity: ${props => props.disabled ? '0.6' : "1"};
 
   &:hover {
-    cursor: "pointer";
+    cursor: ${props => props.disabled ? "not-allowed" : "pointer"};
     color: #ffffff;
     transition: 0.2s;
     background: ${props => props.color ? props.color : "#38c1df"};

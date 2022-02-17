@@ -13,12 +13,13 @@ const Secondary = styled.button`
   color: #38c1df;
   background: #ffffff;
   border: 2px solid #38c1df;
+  opacity: ${props => props.disabled ? '0.6' : "1"};
 
   &:hover {
-    cursor: pointer;
-    background-color: #38c1df;
-    color: #ffffff;
-    border: none;
+    cursor: ${props => props.disabled ? "not-allowed" : "pointer"};
+    background-color: ${props => props.disabled ? "#ffffff" : "#38c1df"};
+    color: ${props => props.disabled ? "#38c1df" : "#ffffff"};
+    border: ${props => props.disabled ? "2px solid #38c1df" : "none"};
     transition: 0.5s;
   }
 `;
