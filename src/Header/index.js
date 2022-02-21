@@ -46,7 +46,7 @@ const Header = ({ user, logout, pathname, navigate }) => {
         <div className="container-fluid">
           <div className="float-start">
             <Link className="navbar-brand" to="/">
-              <img src="./logo.svg" alt="" />
+              <img src="/logo.svg" alt="" />
             </Link>
           </div>
           <div className="float-end">
