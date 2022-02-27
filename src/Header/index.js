@@ -9,34 +9,16 @@ import {
   faSignOutAlt,
   faUserPlus,
 } from "@fortawesome/free-solid-svg-icons";
-import { isAuthenticated, tipoUsuario } from "@nabstore/utils";
+import { isAuthenticated, tipoUsuario, routes } from "@nabstore/utils";
 import { Link } from "@reach/router";
 
-const mfe_links = {
-    CREATE_COLABORADOR: "/users/create-colaborador",
-    HOME: "/",
-    SOBRE: "/sobre",
-    SIGN_UP: "/users/signup",
-    LOGIN: "/users/login",
-    CART: "/cart"
-};
-
-const monolith_links = {
-    CREATE_COLABORADOR: "/colaborador/add",
-    HOME: "/",
-    SOBRE: "/sobre",
-    SIGN_UP: "/signup",
-    LOGIN: "/login",
-    CART: "/cart"
-};
-
-const Header = ({ user, logout, pathname, navigate }) => {
+const Header = ({ user, logout, navigate, pathname }) => {
   const handleLogout = () => {
     logout();
-    if (pathname === "/") {
+    if (pathname === routes.HOME) {
       navigate(0);
     } else {
-      navigate("/");
+      navigate(routes.HOME);
     }
   };
 
@@ -45,7 +27,7 @@ const Header = ({ user, logout, pathname, navigate }) => {
       <div className="container-sm">
         <div className="container-fluid">
           <div className="float-start">
-            <Link className="navbar-brand" to="/">
+            <Link className="navbar-brand" to={routes.HOME}>
               <img src="/logo.svg" alt="" />
             </Link>
           </div>
@@ -53,7 +35,7 @@ const Header = ({ user, logout, pathname, navigate }) => {
             <ul className="navbar-nav">
               {user.tipoUsuarioId === tipoUsuario.COLABORADOR ? (
                 <li className="nav-item">
-                  <Link className="nav-link" to={mfe_links.CREATE_COLABORADOR}>
+                  <Link className="nav-link" to={routes.CREATE_COLABORADOR}>
                     Add Colaborador
                     <FontAwesomeIcon className="ms-2" icon={faPlusCircle} />
                   </Link>
@@ -62,13 +44,13 @@ const Header = ({ user, logout, pathname, navigate }) => {
                 <></>
               )}
               <li className="nav-item">
-                <Link className="nav-link" to={mfe_links.SOBRE}>
+                <Link className="nav-link" to={routes.ABOUT}>
                   Sobre
                   <FontAwesomeIcon className="ms-2" icon={faQuestionCircle} />
                 </Link>
               </li>
               <li className="nav-item">
-                <Link className="nav-link" to={mfe_links.CART}>
+                <Link className="nav-link" to={routes.CART}>
                   Carrinho{" "}
                   <FontAwesomeIcon className="ms-2" icon={faShoppingCart} />
                 </Link>
@@ -76,13 +58,13 @@ const Header = ({ user, logout, pathname, navigate }) => {
               {!isAuthenticated() ? (
                 <>
                   <li className="nav-item">
-                    <Link className="nav-link" to={mfe_links.LOGIN}>
+                    <Link className="nav-link" to={routes.LOGIN}>
                       Login
                       <FontAwesomeIcon className="ms-2" icon={faSignInAlt} />
                     </Link>
                   </li>
                   <li className="nav-item">
-                    <Link className="nav-link" to={mfe_links.SIGN_UP}>
+                    <Link className="nav-link" to={routes.SIGNUP}>
                       Sign Up
                       <FontAwesomeIcon className="ms-2" icon={faUserPlus} />
                     </Link>
@@ -90,7 +72,7 @@ const Header = ({ user, logout, pathname, navigate }) => {
                 </>
               ) : (
                 <li className="nav-item">
-                  <a onClick={handleLogout} className="nav-link" href="/#">
+                  <a onClick={handleLogout} className="nav-link" href="#">
                     {user.nome}{" "}
                     <FontAwesomeIcon className="ms-2" icon={faSignOutAlt} />
                   </a>
